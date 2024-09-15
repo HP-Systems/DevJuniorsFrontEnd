@@ -1,22 +1,31 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Grid2, Typography } from "@mui/material";
 import { CardProyecto } from "./components/cardProyecto";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../AxiosConfig";
+import NoElements from "./components/sinElementos";
 
 export const InicioEstudiante = () => {
     const [proyectos, setProyectos] = useState([]);  // Asegúrate de que sea un array vacío inicialmente
 
-    useEffect(() => {
-        const fetchProyectos = async () => {
-            try {
-                const response = await axiosInstance.get("/proyectos");
-                setProyectos(response.data || []);  // Validación de seguridad para asegurar que sea un array
-            } catch (error) {
-                console.error("Error trayendo proyectos:", error);
+    const fetchProyectos = async () => {
+        try {
+            const response = await axiosInstance.get("/proyectos");
+            if(response.data){
+                console.log("Proyectos obtenidos:", response.data.data);
+                setProyectos(response.data.data);
+                console.log("Proyectos:", proyectos);
             }
-        };
-
-        fetchProyectos();
+        } catch (error) {
+            console.error("Error trayendo proyectos:", error);
+        }
+    };
+    useEffect(() => {
+        try{
+            fetchProyectos();
+        }
+        catch (error) {
+            console.error("Error trayendo proyectos:", error);
+        }
     }, []);
 
     return (
@@ -27,22 +36,20 @@ export const InicioEstudiante = () => {
                 </Grid>
             </Grid>
 
-            {Array.isArray(proyectos) && proyectos.length === 0 ? (
-                <Typography variant="body1" sx={{ marginTop: 2 }}>
-                    No hay proyectos disponibles.
-                </Typography>
-            ) : (
-                <Grid container spacing={2} sx={{ marginTop: 2 }}>
-                    {proyectos.map  ((proyecto) => (
-                        <Grid item xs={12} sm={6} md={4} key={proyecto.id}>
-                            <CardProyecto
-                                nameProyect={proyecto.titulo}
-                                bodyProyect={proyecto.descripcion}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-            )}
+            {proyectos.length > 0 ? (
+        <Grid2 gridColumn={2}>
+          {proyectos.map((proyecto) => {
+            return (
+              <CardProyecto
+                key={proyecto.id}
+                proyecto={proyecto}
+              />
+            );
+          })}
+        </Grid2>
+      ) : (
+        <NoElements />
+      )}
         </Container>
     );
 };

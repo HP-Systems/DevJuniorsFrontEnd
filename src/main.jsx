@@ -18,6 +18,9 @@ import DetailProyect from './Pages/Negocio/DetalleProyecto.jsx';
 import { LoginPage } from './auth/Login.jsx';
 import NavbarE from './Pages/Estudiante/components/navbarE.jsx';
 import { InicioEstudiante } from './Pages/Estudiante/InicioEstudiante.jsx';
+import DetalleProyecto  from './Pages/Estudiante/DetalleProyecto.jsx';
+import { Historial } from './Pages/Estudiante/Historial.jsx';
+import { EtapasPropuesta } from './Pages/Estudiante/components/EtapasPropuesta.jsx';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,9 @@ const router = createBrowserRouter([
     element: < NavbarE/>,
     children: [
       { path: 'inicio', element: <InicioEstudiante /> },
+      { path: 'detalleProyecto/:id', element: <DetalleProyecto /> },
+      { path: 'historial', element: <Historial /> },
+      { path: 'etapas-propuesta/:id', element: <EtapasPropuesta/> },
     ],
   },
   {

@@ -2,7 +2,7 @@
 import { NavLink } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export const CardProyecto = ({proyecto}) => {
+export const CardEtapas = ({proyecto}) => {
   // eslint-disable-next-line react/prop-types, no-unused-vars
   const {descripcion,fecha_creacion,fecha_limite,status,titulo,id} = proyecto;
   console.log("CardProyecto:", proyecto);
@@ -19,10 +19,10 @@ export const CardProyecto = ({proyecto}) => {
             {descripcion}
           </p>
           <NavLink 
-            to={'/estudiante/detalleProyecto/'+id}
+            to={'/estudiante/etapas-propuesta/'+id}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Ver Proyecto
+            Ver Progreso
             <svg
               className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
               aria-hidden="true"

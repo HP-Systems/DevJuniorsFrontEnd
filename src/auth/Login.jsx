@@ -33,10 +33,12 @@ export const LoginPage = () => {
         const response = await axiosInstance.post("/login", login);
         setLoading(false);
         console.log("Respuesta del login:", response.data);
-        if(response.data.tipo_usuario === "1"){
+        if(response.data.data.tipo_usuario === "1"){
+          localStorage.setItem("user", JSON.stringify(response.data.data));
           nav("/estudiante/inicio");
         }
-        else if(response.data.data.tipo_usuario === "2"){
+        if(response.data.data.tipo_usuario === "2"){
+          localStorage.setItem("user", JSON.stringify(response.data.data));
           console.log("Usuario es una organización");
           nav("/negocio/inicio");
         }
