@@ -8,8 +8,7 @@ const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
         // Puedes agregar más headers aquí si es necesario
-    },
-    withCredentials: true, // Si necesitas enviar cookies con las solicitudes
+    }, // Si necesitas enviar cookies con las solicitudes
 });
 
 // Configurar interceptores de solicitud/respuesta si es necesario
