@@ -4,6 +4,7 @@ import { useState } from "react";
 import FormValidator from "../FormValidator";
 import ErrorLabel from "../Components/ErrorLabel";
 import axiosInstance from "../../AxiosConfig";
+import { Navigate } from "react-router-dom";
 
 export default function Student() {
     const steps = ['Usuario', 'Estudiante'];
@@ -20,6 +21,7 @@ export default function Student() {
     const [periodo , setPeriodo] = useState('');
     const [n_periodo, setNPeriodo] = useState('');
     const [errors, setErrors] = useState({});
+    const [foto_credencial, setFotoCredencial] = useState(null);
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
@@ -47,6 +49,7 @@ export default function Student() {
             clave_estudiante: { required: true },
             periodo: { required: true },
             n_periodo: { required: true, number: true },
+            foto_credencial: { required: true },
         });
         const errors = validator.validar({
             email,
@@ -60,11 +63,13 @@ export default function Student() {
             clave_estudiante,
             n_periodo,
             periodo,
+            foto_credencial,
         });
         if (Object.keys(errors).length > 0) {
             setErrors(errors);
             return;
         }
+        const formattedFechaNacimiento = fechaNacimiento.toISOString().split('T')[0];
         const userData = {
             email,
             password,
@@ -73,26 +78,24 @@ export default function Student() {
             nombre,
             apellido,
             telefono,
-            fecha_nacimiento: fechaNacimiento,
+            fecha_nacimiento: formattedFechaNacimiento,
             universidad,
             clave_estudiante,
             periodo,
             n_periodo,
+            foto_credencial: foto_credencial.name,
         };
-        axiosInstance.post('/register', userData)
+        axiosInstance.post('/register', userData,
+            { headers: { 'Content-Type': 'application/json' } }
+        )
         .then(response => {
             console.log('Registro exitoso:', response.data);
+            Navigate('/login');
         })
         .catch(error => {
             if (error.response) {
                 // El servidor respondió con un código de error
-                console.error('Error de servidor:', error.response.status, error.response.data);
-            } else if (error.request) {
-                // La solicitud fue hecha pero no se recibió respuesta
-                console.error('No se recibió respuesta del servidor:', error.request);
-            } else {
-                // Algo sucedió al configurar la solicitud
-                console.error('Error al hacer la solicitud:', error.message);
+                setErrors(error.response.data.error);
             }
         });
     };
@@ -234,6 +237,12 @@ export default function Student() {
                         onChange={(e) => setNPeriodo(e.target.value)}
                     />
                     <ErrorLabel error={errors.n_periodo} />
+                    <input type="file" 
+                        id="foto_credencial" 
+                        name="Foto de Credencial" 
+                        accept="image/*" 
+                        onChange={(e) => setFotoCredencial(e.target.files[0])}
+                    />
                 </>
             )}
             <Grid2 container spacing={2} justifyContent="flex-end">

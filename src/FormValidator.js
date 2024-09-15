@@ -27,10 +27,6 @@ class FormValidator {
                   if (date == 'Invalid Date') {
                     errores[key].push('Fecha no válida');
                   }
-                  let year = date.getFullYear();
-                  let month = (date.getMonth() + 1).toString().padStart(2, '0');
-                  let day = date.getDate().toString().padStart(2, '0');
-                  form[key] = `${year}-${month}-${day}`;
                 }
                 if (reglas.number && isNaN(form[key])) {
                   errores[key].push('Debe ser un número');
