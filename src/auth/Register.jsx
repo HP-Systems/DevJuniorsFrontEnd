@@ -12,10 +12,11 @@ export default function Register() {
     };
 
     return (
-        <Container maxWidth="max" className="bg-red-950" sx={{ display: 'flex', height: '100vh', overflow: 'hidden'}}>
+        <Container maxWidth="max" sx={{ display: 'flex', height: '100vh', overflow: 'hidden'}}>
             <Grid container spacing={0}>
                 {/* Imagen a la izquierda */}
-                <Grid 
+                <Grid
+                    borderRight={45}
                     item 
                     xs={12} 
                     md={8} 
@@ -40,7 +41,6 @@ export default function Register() {
                         overflowY: 'auto', // El formulario puede scrollear si excede la pantalla
                         padding: 4, 
                     }}
-                    className="bg-slate-200"
                 >
                     <Typography variant="h3" fontWeight={'bold'} gutterBottom>Registro</Typography>
                     <FormControl  component="fieldset" fullWidth>
