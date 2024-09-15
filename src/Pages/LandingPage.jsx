@@ -12,7 +12,7 @@ export default function LandingPage() {
             <Typography variant="h6" component="div">DevJuniors</Typography>
           </a>
           <div style={{ marginLeft: "auto", display: "flex", gap: 16 }}>
-            <a href="#login" style={{ textDecoration: 'none', color: 'inherit',fontFamily:'arial' }}>Iniciar Sesión</a>
+            <NavLink to='/login' style={{ textDecoration: 'none', color: 'inherit',fontFamily:'arial' }}>Iniciar Sesión</NavLink>
             <NavLink to="/register" style={{ textDecoration: 'none', color: 'inherit', fontFamily:'arial' }}>Registro</NavLink>
           </div>
         </Toolbar>

@@ -15,6 +15,7 @@ import { InicioNegocio } from './Pages/Negocio/InicioNegocio.jsx';
 import { ProyectosNegocio } from './Pages/Negocio/ProyectosNegociol.jsx';
 import { ConfiguracionNegocio } from './Pages/Negocio/ConfiguracionNegocio.jsx';
 import DetailProyect from './Pages/Negocio/DetalleProyecto.jsx';
+import { LoginPage } from './auth/Login.jsx';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  }, 
+  {
+    path: '/login',
+    element: < LoginPage />,
+    // element: <Login />, // Esto se debe reemplazar por la implementación de login
   }
 
 
