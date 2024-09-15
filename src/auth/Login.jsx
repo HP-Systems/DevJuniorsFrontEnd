@@ -38,8 +38,6 @@ export const LoginPage = () => {
     } catch (error) {}
   };
 
-
-
   return (
     <Container
       maxWidth="max"
@@ -95,7 +93,7 @@ export const LoginPage = () => {
             value={login.email}
             onChange={handleInputChange}
           />
-   
+
           <TextField
             id="password"
             label="Password"
@@ -106,16 +104,14 @@ export const LoginPage = () => {
             value={login.password}
             onChange={handleInputChange}
           />
-         
 
           <Button
             variant="contained"
             color="primary"
             fullWidth
-                onClick={() =>{
-                    console.log("fjlkasdjkfjakl")
-                }}
-      
+            onClick={() => {
+              console.log("fjlkasdjkfjakl");
+            }}
           >
             Entrar
           </Button>
