@@ -36,16 +36,18 @@ export const LoginPage = () => {
         if(response.data.tipo_usuario === "1"){
           nav("/estudiante/inicio");
         }
+        else if(response.data.data.tipo_usuario === "2"){
+          console.log("Usuario es una organización");
+          nav("/negocio/inicio");
+        }
       } catch (error) {
         setLoading(false);
         if (error.response) {
           console.error("Error en el login:", error.response.data);
           setMsj(error.response.data.msg);
       }
-    };
+    }
   };
-
-
 
   return (
     <Container
@@ -103,7 +105,7 @@ export const LoginPage = () => {
             value={login.email}
             onChange={handleInputChange}
           />
-   
+
           <TextField
             id="password"
             label="Password"
@@ -114,7 +116,6 @@ export const LoginPage = () => {
             value={login.password}
             onChange={handleInputChange}
           />
-         
 
           <Button
             variant="contained"
