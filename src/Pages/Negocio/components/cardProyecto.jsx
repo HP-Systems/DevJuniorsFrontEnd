@@ -1,17 +1,8 @@
-import {
-  Badge,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Container,
-  Typography,
-} from "@mui/material";
+
 import { NavLink } from "react-router-dom";
 
-export const CardProyecto = (props) => {
-  const { nameProyect, bodyProyect } = props;
+export const CardProyecto = ({proyecto}) => {
+  const {descripcion,fecha_creacion,fecha_limite,status,titulo,id} = proyecto;
 
   return (
     <div style={{ margin: "2%" }}>
@@ -19,14 +10,14 @@ export const CardProyecto = (props) => {
         <div className="p-5">
           <a href="#">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-              Titulo del Proyecto
+              {titulo}
             </h5>
           </a>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Descripcion del proyecto Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti neque libero itaque sapiente quos est blanditiis architecto, illum provident? Accusamus velit soluta porro. Reiciendis vel repellat nesciunt animi quae natus!
+            {descripcion}
           </p>
           <NavLink 
-            to={'/negocio/detalleProyecto'}
+            to={'/negocio/detalleProyecto/'+id}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Ver Proyecto

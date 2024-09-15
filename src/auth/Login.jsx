@@ -28,9 +28,13 @@ export const LoginPage = () => {
     try {
       const response = await axiosInstance.post("/login", login);
       console.log("Respuesta del login:", response.data);
-      if(response.data.tipo_usuario === "1"){
+      if(response.data.data.tipo_usuario === "1"){
         console.log("Usuario es un estudiante");
         nav("/");
+      }
+      else if(response.data.data.tipo_usuario === "2"){
+        console.log("Usuario es una organización");
+        nav("/negocio/inicio");
       }
     } catch (error) {
       if (error.response) {

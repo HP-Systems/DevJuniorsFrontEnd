@@ -20,6 +20,8 @@ import {
 } from "@mui/material";
 import { Edit, Delete, CheckCircle, Cancel } from "@mui/icons-material"; // Íconos nativos de Material-UI
 import ModalEdit from "./components/modalEdicion";
+import axiosInstance from "../../../AxiosConfig";
+import { useParams } from "react-router-dom";
 
 
 
@@ -28,6 +30,26 @@ export default function DetailProyect() {
   const [isModalOpenEdit, setIsModalOpenEdit] = React.useState(false);
   const [selectedApplication, setSelectedApplication] = React.useState(null);
   const [tabValue, setTabValue] = React.useState(0);
+  const [proyect, setProyect] = React.useState({});
+  const {id} = useParams();
+  
+  const fetchProyect = async () => {
+
+    try {
+      const response = await axiosInstance.get(`/proyecto/${id}`);
+      if (response.data){
+        console.log("Proyecto obtenido:", response.data.data);
+        setProyect(response.data.data);
+        // setProyectos(response.data.data);
+      }
+    } catch (error) {
+      console.error(error.msj)
+    }
+  }
+
+  React.useEffect(() => {
+    fetchProyect();
+  },[])
 
   const handleChangeTab = (event, newValue) => {
     setTabValue(newValue);
@@ -61,10 +83,10 @@ export default function DetailProyect() {
         <CardHeader
           title={
             <Typography variant="h4" component="h2">
-              {project.title}
+              {proyect.titulo}
             </Typography>
           }
-          subheader={project.description}
+          subheader={proyect.descripcion}
           action={
             <Box>
               <Button variant="outlined" startIcon={<Edit />} onClick={() => setIsModalOpenEdit(true)}>
@@ -89,10 +111,10 @@ export default function DetailProyect() {
                   <strong>Estado:</strong> <Badge>{project.status}</Badge>
                 </Typography>
                 <Typography>
-                  <strong>Fecha de inicio:</strong> {project.startDate}
+                  <strong>Fecha de inicio:</strong> {proyect.fecha_creacion}
                 </Typography>
                 <Typography>
-                  <strong>Fecha de finalización:</strong> {project.endDate}
+                  <strong>Fecha de finalización:</strong> {proyect.fecha_limite}
                 </Typography>
               </Grid>
             </Grid>
@@ -150,7 +172,7 @@ export default function DetailProyect() {
         </DialogContent>
       </Dialog>
       <ModalEdit
-      proyecto={project}
+      proyecto={proyect}
       modalState={isModalOpenEdit}
       handleModalState={() => setIsModalOpenEdit(false)}  // Función para cerrar el modal al presionar el botón "Cerrar"
       />

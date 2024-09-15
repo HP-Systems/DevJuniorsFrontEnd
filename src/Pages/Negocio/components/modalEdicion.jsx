@@ -8,6 +8,7 @@ import {
   IconButton
 } from '@mui/material';
 import Close from '@mui/icons-material/Close';
+import axiosInstance from '../../../../AxiosConfig';
 
 const style = {
   position: 'absolute',
@@ -22,10 +23,23 @@ const style = {
 };
 
 const ModalEdit = ({ proyecto, modalState, handleModalState }) => {
-  const { description,title } = proyecto;
+  const { descripcion, titulo,id } = proyecto;
+  const [proyectoNew, setProyecto] = useState({ titulo, descripcion});
 
   const handleInputChange = (event) => {
-    // Aquí puedes manejar los cambios de los inputs
+    const { id, value } = event.target;
+    setProyecto((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handleEditProyect = () => {
+    // Aquí puedes hacer algo con el proyecto editado, como guardarlo o enviarlo a una API
+    console.log(proyectoNew); // Este es el objeto actualizado
+    const response = axiosInstance.put(`/proyecto/status/${id}`,proyectoNew);
+    console.log(response); 
+    handleModalState();
   };
 
   return (
@@ -39,25 +53,27 @@ const ModalEdit = ({ proyecto, modalState, handleModalState }) => {
         </Box>
 
         <TextField
+          id="titulo"
           fullWidth
           margin="normal"
           label="Nombre del Proyecto"
-          value={title}
+          value={proyectoNew.titulo}
           onChange={handleInputChange}
         />
 
         <TextField
+          id="descripcion"
           fullWidth
           margin="normal"
           label="Descripción"
           multiline
           rows={4}
-          value={description}
+          value={proyectoNew.descripcion}
           onChange={handleInputChange}
         />
 
         <Box mt={2} display="flex" justifyContent="space-between">
-          <Button variant="contained" color="primary" onClick={handleModalState}>
+          <Button variant="contained" color="primary" onClick={handleEditProyect}>
             Guardar Cambios
           </Button>
           <Button variant="outlined" color="secondary" onClick={handleModalState}>

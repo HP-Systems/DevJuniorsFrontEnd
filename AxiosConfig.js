@@ -25,8 +25,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     (response) => {
-        console.log(response);
-        return response.data; // Asegúrate de devolver solo los datos si es necesario
+        return response; // Asegúrate de devolver solo los datos si es necesario
     },
     (error) => {
         // Manejo global de errores
