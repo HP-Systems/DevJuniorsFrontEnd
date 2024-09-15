@@ -59,7 +59,7 @@ export default function Register() {
                         ) : (
                             <Organization />
                         )}
-                        <NavLink className="flex justify-center mt-6"><Typography variant="body" className="text-blue-500">Ya estoy registrado</Typography></NavLink>
+                        <NavLink to="/login" className="flex justify-center mt-6"><Typography variant="body" className="text-blue-500">Ya estoy registrado</Typography></NavLink>
                     </FormControl>
                 </Grid>
             </Grid>

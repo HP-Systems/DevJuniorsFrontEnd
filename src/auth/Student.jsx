@@ -5,6 +5,7 @@ import FormValidator from "../FormValidator";
 import ErrorLabel from "../Components/ErrorLabel";
 import axiosInstance from "../../AxiosConfig";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from '@mui/material';
 
 export default function Student() {
     const nav = useNavigate();
@@ -23,6 +24,7 @@ export default function Student() {
     const [n_periodo, setNPeriodo] = useState('');
     const [errors, setErrors] = useState({});
     const [foto_credencial, setFotoCredencial] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
@@ -38,6 +40,7 @@ export default function Student() {
     };
 
     const handleSubmit = () => {
+        setLoading(true);
         const validator = new FormValidator({
             email: { required: true, email: true },
             password: { required: true, min: 6 },
@@ -67,6 +70,7 @@ export default function Student() {
             foto_credencial,
         });
         if (Object.keys(errors).length > 0) {
+            setLoading(false);
             setErrors(errors);
             return;
         }
@@ -90,10 +94,12 @@ export default function Student() {
             { headers: { 'Content-Type': 'application/json' } }
         )
         .then(response => {
+            setLoading(false);
             console.log('Registro exitoso:', response.data);
             nav('/login');
         })
         .catch(error => {
+            setLoading(false);
             if (error.response) {
                 // El servidor respondió con un código de error
                 setErrors(error.response.data.error);
@@ -261,6 +267,7 @@ export default function Student() {
                     {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
                 </Button>
             </Grid2>
+            <CircularProgress style={{position: 'absolute', top: '50%', left: '50%', display: loading ? 'block' : 'none'}} />
         </>
     );
 }
