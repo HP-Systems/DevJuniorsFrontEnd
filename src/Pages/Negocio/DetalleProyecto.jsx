@@ -32,9 +32,9 @@ export default function DetailProyect() {
   const [tabValue, setTabValue] = React.useState(0);
   const [proyect, setProyect] = React.useState({});
   const {id} = useParams();
+  const  [propuestas,setPropuesta] = React.useState({});
   
   const fetchProyect = async () => {
-
     try {
       const response = await axiosInstance.get(`/proyecto/${id}`);
       if (response.data){
@@ -47,8 +47,25 @@ export default function DetailProyect() {
     }
   }
 
+  const fetchPrpuestas = async () => {
+    try {
+      const response = await axiosInstance.get(`/propuestas/${id}`);
+      if (response.data){
+        console.log("Solicitudes obtenidas:", response.data.data);
+        setPropuesta(response.data.data);
+        // setSolicitudes(response.data.data);
+      }
+    } catch (error) {
+      console.error(error.msj)
+    }
+  }
+
   React.useEffect(() => {
     fetchProyect();
+  },[])
+
+  React.useEffect(() => {
+    fetchPrpuestas();
   },[])
 
   const handleChangeTab = (event, newValue) => {
@@ -122,16 +139,12 @@ export default function DetailProyect() {
 
           {tabValue === 1 && (
             <List sx={{ maxHeight: 400, overflow: "auto" }}>
-              {applications.map((application) => (
+              {propuestas.map((application) => (
                 <ListItem key={application.id} sx={{ mb: 2 }}>
                   <Card sx={{ width: "100%" }}>
                     <CardHeader
-                      avatar={
-                        <Avatar src="/placeholder.svg?height=40&width=40">
-                          {application.studentName.split(" ").map((n) => n[0]).join("")}
-                        </Avatar>
-                      }
-                      title={application.studentName}
+                     
+                      title={application.URL_propuesta}
                       action={
                         <Button variant="outlined" onClick={() => openModal(application)}>
                           Ver Solicitud
