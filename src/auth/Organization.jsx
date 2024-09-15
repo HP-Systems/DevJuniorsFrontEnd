@@ -3,9 +3,10 @@ import { useState } from "react";
 import FormValidator from "../FormValidator";
 import ErrorLabel from "../Components/ErrorLabel";
 import axiosInstance from "../../AxiosConfig";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Organization() {
+    const nav = useNavigate();
     const steps = ['Usuario', 'Empresa'];
     const [activeStep, setActiveStep] = useState(0);
     const [email, setEmail] = useState('');
@@ -75,7 +76,7 @@ export default function Organization() {
         )
         .then(response => {
             console.log('Registro exitoso:', response.data);
-            Navigate('/login');
+            nav('/login');
         })
         .catch(error => {
             if (error.response) {
