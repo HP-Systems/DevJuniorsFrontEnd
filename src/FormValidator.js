@@ -40,7 +40,10 @@ class FormValidator {
                 }
                 if (reglas.name && !/^[a-zA-Z\sáéíóúÁÉÍÓÚñÑüÜ]*$/.test(form[key])) {
                   errores[key].push('Solo se permiten letras y espacios');
-                } 
+                }
+                if(errores[key].length === 0){
+                  delete errores[key];
+                }
               }
             }
             return errores;

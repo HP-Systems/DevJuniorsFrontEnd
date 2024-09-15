@@ -2,6 +2,8 @@ import { Button, FormControl, Grid2, InputLabel, MenuItem, Select, Step, StepLab
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import FormValidator from "../FormValidator";
+import ErrorLabel from "../Components/ErrorLabel";
+import axiosInstance from "../../AxiosConfig";
 
 export default function Student() {
     const steps = ['Usuario', 'Estudiante'];
@@ -17,10 +19,9 @@ export default function Student() {
     const [clave_estudiante, setClaveEstudiante] = useState('');
     const [periodo , setPeriodo] = useState('');
     const [n_periodo, setNPeriodo] = useState('');
-    const [foto_credencial, setFotoCredencial] = useState('');
+    const [errors, setErrors] = useState({});
 
     const handleNext = () => {
-
         if (activeStep === steps.length - 1) {
             handleSubmit();
         }
@@ -45,6 +46,7 @@ export default function Student() {
             universidad: { required: true },
             clave_estudiante: { required: true },
             periodo: { required: true },
+            n_periodo: { required: true, number: true },
         });
         const errors = validator.validar({
             email,
@@ -56,10 +58,11 @@ export default function Student() {
             fechaNacimiento,
             universidad,
             clave_estudiante,
+            n_periodo,
             periodo,
         });
         if (Object.keys(errors).length > 0) {
-            console.log(errors);
+            setErrors(errors);
             return;
         }
         const userData = {
@@ -75,8 +78,23 @@ export default function Student() {
             clave_estudiante,
             periodo,
             n_periodo,
-            foto_credencial
         };
+        axiosInstance.post('/register', userData)
+        .then(response => {
+            console.log('Registro exitoso:', response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                // El servidor respondió con un código de error
+                console.error('Error de servidor:', error.response.status, error.response.data);
+            } else if (error.request) {
+                // La solicitud fue hecha pero no se recibió respuesta
+                console.error('No se recibió respuesta del servidor:', error.request);
+            } else {
+                // Algo sucedió al configurar la solicitud
+                console.error('Error al hacer la solicitud:', error.message);
+            }
+        });
     };
 
     const periodos = [
@@ -104,6 +122,7 @@ export default function Student() {
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
                     />
+                    <ErrorLabel error={errors.email} />
                     <TextField 
                         id="password" 
                         label="Password" 
@@ -114,6 +133,7 @@ export default function Student() {
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    <ErrorLabel error={errors.password} />
                     <TextField 
                         id="passwordConfirmation" 
                         label="Confirmar Contraseña" 
@@ -124,7 +144,7 @@ export default function Student() {
                         value={passwordConfirmation} 
                         onChange={(e) => setPasswordConfirmation(e.target.value)}
                     />
-                                        <TextField 
+                    <TextField 
                         id="nombre" 
                         label="Nombre" 
                         variant="outlined" 
@@ -133,6 +153,7 @@ export default function Student() {
                         value={nombre} 
                         onChange={(e) => setNombre(e.target.value)}
                     />
+                    <ErrorLabel error={errors.nombre} />
                     <TextField 
                         id="apellido" 
                         label="Apellido" 
@@ -143,6 +164,7 @@ export default function Student() {
                         value={apellido} 
                         onChange={(e) => setApellido(e.target.value)}
                     />
+                    <ErrorLabel error={errors.apellido} />
                 </>
             )}
             {activeStep === 1 && (
@@ -157,11 +179,14 @@ export default function Student() {
                         value={telefono} 
                         onChange={(e) => setTelefono(e.target.value)}
                     />
+                    <ErrorLabel error={errors.telefono} />
                     <DatePicker
                         label="Fecha de Nacimiento"
                         value={fechaNacimiento}
                         onChange={(date) => setFechaNacimiento(date)}
+                        sx={{ width: '100%', marginTop: 2}}
                     />
+                    <ErrorLabel error={errors.fechaNacimiento} />
                     <TextField 
                         id="universidad" 
                         label="Universidad" 
@@ -172,6 +197,7 @@ export default function Student() {
                         value={universidad} 
                         onChange={(e) => setUniversidad(e.target.value)}
                     />
+                    <ErrorLabel error={errors.universidad} />
                     <TextField 
                         id="clave_estudiante" 
                         label="Clave de Estudiante" 
@@ -182,6 +208,7 @@ export default function Student() {
                         value={clave_estudiante} 
                         onChange={(e) => setClaveEstudiante(e.target.value)}
                     />
+                    <ErrorLabel error={errors.clave_estudiante} />
                     <FormControl fullWidth margin="normal">
                         <InputLabel>Periodo</InputLabel>
                         <Select
@@ -195,6 +222,7 @@ export default function Student() {
                             ))}
                         </Select>
                     </FormControl>
+                    <ErrorLabel error={errors.periodo} />
                     <TextField 
                         id="n_periodo" 
                         label="Número de Periodo" 
@@ -205,16 +233,7 @@ export default function Student() {
                         value={n_periodo} 
                         onChange={(e) => setNPeriodo(e.target.value)}
                     />
-                    <TextField 
-                        id="foto_credencial" 
-                        label="Foto de Credencial" 
-                        variant="outlined" 
-                        fullWidth 
-                        margin="normal" 
-                        type="file"
-                        value={foto_credencial} 
-                        onChange={(e) => setFotoCredencial(e.target.value)}
-                    />
+                    <ErrorLabel error={errors.n_periodo} />
                 </>
             )}
             <Grid2 container spacing={2} justifyContent="flex-end">
