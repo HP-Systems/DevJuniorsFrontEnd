@@ -14,6 +14,7 @@ import Navbar from './Pages/Negocio/components/navbar.jsx';
 import { InicioNegocio } from './Pages/Negocio/InicioNegocio.jsx';
 import { ProyectosNegocio } from './Pages/Negocio/ProyectosNegociol.jsx';
 import { ConfiguracionNegocio } from './Pages/Negocio/ConfiguracionNegocio.jsx';
+import DetailProyect from './Pages/Negocio/DetalleProyecto.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,8 @@ const router = createBrowserRouter([
       { path: 'inicio', element: <InicioNegocio /> },
       { path: 'proyectos', element: <ProyectosNegocio /> },
       { path: 'configuracion', element: <ConfiguracionNegocio /> },
+      { path : 'detalleProyecto', element: <DetailProyect/>}
+
     ],
   },
   {
