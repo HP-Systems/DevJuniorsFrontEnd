@@ -7,6 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from "./routes/root";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Register from './auth/Register.jsx';
 
 const router = createBrowserRouter([
@@ -14,7 +16,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     children: [
-      { path: '/register', element: <Register /> },
+      
     ],
   },
   {
@@ -23,14 +25,20 @@ const router = createBrowserRouter([
   },
   {
     path: '/landinnPage'
+  },
+  {
+    path: '/register',
+    element: <Register />,
   }
 
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
+    </LocalizationProvider>
   </StrictMode>,
 )

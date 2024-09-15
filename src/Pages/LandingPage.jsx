@@ -1,5 +1,6 @@
 import { Button, Container, Grid, Typography, Card, CardContent, AppBar, Toolbar, Link as MuiLink } from "@mui/material";
 import { Home, Code, Palette, Storage } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 
 export default function LandingPage() {
   return (
@@ -13,7 +14,7 @@ export default function LandingPage() {
           <div style={{ marginLeft: "auto", display: "flex", gap: 16 }}>
             <a href="#what-is" style={{ textDecoration: 'none', color: 'inherit' }}>¿Qué es?</a>
             <a href="#components" style={{ textDecoration: 'none', color: 'inherit' }}>Componentes</a>
-            <a href="#learn-more" style={{ textDecoration: 'none', color: 'inherit' }}>Aprende más</a>
+            <NavLink to="/register" style={{ textDecoration: 'none', color: 'inherit' }}>Registro</NavLink>
           </div>
         </Toolbar>
       </AppBar>
