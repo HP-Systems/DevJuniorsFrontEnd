@@ -125,7 +125,7 @@ export default function LandingPage() {
       </main>
 
       <footer style={{ padding: 16, backgroundColor: "#2b2d42", color: "#fff", textAlign: "center" }}>
-        <Typography variant="body2" style={{ color: "#8d99ae" }}>© 2023 DevJuniors. Todos los derechos reservados.</Typography>
+        <Typography variant="body2" style={{ color: "#8d99ae" }}>© 2024 DevJuniors. Todos los derechos reservados.</Typography>
         <div style={{ marginTop: 8 }}>
           <MuiLink underline="none" color="inherit" style={{ marginRight: 16 }} href="#">
             Términos de Servicio
