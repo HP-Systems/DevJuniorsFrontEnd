@@ -8,6 +8,10 @@ import {
 } from "react-router-dom";
 import Root from "./routes/root";
 import Register from './auth/Register.jsx';
+import Navbar from './Pages/Negocio/components/navbar.jsx';
+import { InicioNegocio } from './Pages/Negocio/InicioNegocio.jsx';
+import { ProyectosNegocio } from './Pages/Negocio/ProyectosNegociol.jsx';
+import { ConfiguracionNegocio } from './Pages/Negocio/ConfiguracionNegocio.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +26,15 @@ const router = createBrowserRouter([
     element: <h1>Page Not Found</h1>,
   },
   {
-    path: '/landinnPage'
+    path: '/negocio',
+    element:<Navbar />,
+    children: [
+      { path: 'inicio', element: <InicioNegocio /> },
+      { path: 'proyectos', element: <ProyectosNegocio /> },
+      { path: 'configuracion', element: <ConfiguracionNegocio /> },
+    ],
   }
+
 
 ]);
 

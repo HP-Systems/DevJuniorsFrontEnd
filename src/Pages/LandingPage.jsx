@@ -3,39 +3,44 @@ import { Home, Code, Palette, Storage } from "@mui/icons-material";
 
 export default function LandingPage() {
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#edf2f4", display: "flex", flexDirection: "column" }}>
-      <AppBar position="static" style={{ backgroundColor: "#2b2d42" }}>
+    <>
+      <AppBar style={{ backgroundColor: "#2b2d42" }}>
         <Toolbar>
           <a href="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
             <Home style={{ marginRight: 8 }} />
-            <Typography variant="h6" component="div">WebExplorer</Typography>
+            <Typography variant="h6" component="div">DevJuniors</Typography>
           </a>
           <div style={{ marginLeft: "auto", display: "flex", gap: 16 }}>
-            <a href="#what-is" style={{ textDecoration: 'none', color: 'inherit' }}>¿Qué es?</a>
-            <a href="#components" style={{ textDecoration: 'none', color: 'inherit' }}>Componentes</a>
-            <a href="#learn-more" style={{ textDecoration: 'none', color: 'inherit' }}>Aprende más</a>
+            <a href="#login" style={{ textDecoration: 'none', color: 'inherit',fontFamily:'arial' }}>Iniciar Sesión</a>
+            <a href="#register" style={{ textDecoration: 'none', color: 'inherit', fontFamily:'arial'}}>Registrarse</a>
           </div>
         </Toolbar>
       </AppBar>
+
       <main style={{ flex: 1 }}>
-        <section style={{ padding: "48px 0", backgroundColor: "#ef233c", color: "#fff", textAlign: "center" }}>
+        {/* Sección principal de la página */}
+        <section style={{ padding: "100px", backgroundColor: "#74200F", color: "#fff", textAlign: "center" }}>
           <Container>
             <Typography variant="h3" component="h1" gutterBottom style={{ fontWeight: "bold" }}>
-              Descubre el Mundo de las Páginas Web
+              Conecta Estudiantes con Negocios para Innovar
             </Typography>
             <Typography variant="h6" gutterBottom>
-              Explora los fundamentos de las páginas web y cómo dan forma a nuestra experiencia en línea.
+              DevJuniors es una plataforma que une a pequeños y medianos negocios con estudiantes universitarios,
+              impulsando proyectos tecnológicos innovadores.
             </Typography>
-            <Button variant="contained" style={{ backgroundColor: "#2b2d42" }}>Comienza a Aprender</Button>
+            <Button variant="contained" style={{ backgroundColor: "#2b2d42" }}>Únete Ahora</Button>
           </Container>
         </section>
-        <section id="what-is" style={{ padding: "48px 0", textAlign: "center" }}>
+
+        {/* ¿Cómo funciona? */}
+        <section id="how-it-works" style={{ padding: "48px 0", textAlign: "center" }}>
           <Container>
             <Typography variant="h4" component="h2" gutterBottom style={{ fontWeight: "bold", color: "#2b2d42" }}>
-              ¿Qué es una Página Web?
+              ¿Cómo Funciona?
             </Typography>
             <Typography variant="body1" gutterBottom style={{ maxWidth: "700px", margin: "0 auto", color: "#2b2d42" }}>
-              Una página web es un documento digital diseñado para ser mostrado en un navegador web. Es la unidad básica de la World Wide Web, accesible a través de una dirección URL única.
+              Conectamos a negocios con estudiantes universitarios para desarrollar soluciones innovadoras que impulsen el crecimiento
+              de las empresas mientras los estudiantes obtienen experiencia real y beneficios económicos.
             </Typography>
             <Grid container spacing={4} justifyContent="center" style={{ marginTop: 32 }}>
               <Grid item xs={12} md={4}>
@@ -43,10 +48,10 @@ export default function LandingPage() {
                   <CardContent>
                     <Code style={{ fontSize: 48, color: "#2b2d42" }} />
                     <Typography variant="h6" component="div" style={{ marginTop: 16 }}>
-                      HTML
+                      Empresas
                     </Typography>
                     <Typography variant="body2">
-                      El lenguaje de marcado que estructura el contenido de la página.
+                      Los negocios pueden publicar sus necesidades y recibir propuestas innovadoras de los estudiantes.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -56,10 +61,10 @@ export default function LandingPage() {
                   <CardContent>
                     <Palette style={{ fontSize: 48, color: "#2b2d42" }} />
                     <Typography variant="h6" component="div" style={{ marginTop: 16 }}>
-                      CSS
+                      Estudiantes
                     </Typography>
                     <Typography variant="body2">
-                      El lenguaje que define el estilo y la presentación visual de la página.
+                      Los estudiantes proponen soluciones creativas y tecnológicas para resolver los desafíos empresariales.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -69,10 +74,10 @@ export default function LandingPage() {
                   <CardContent>
                     <Storage style={{ fontSize: 48, color: "#2b2d42" }} />
                     <Typography variant="h6" component="div" style={{ marginTop: 16 }}>
-                      JavaScript
+                      Resultados
                     </Typography>
                     <Typography variant="body2">
-                      El lenguaje de programación que añade interactividad y funcionalidad dinámica.
+                      Las empresas pueden implementar proyectos exitosos, y los estudiantes obtienen experiencia y compensación.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -80,54 +85,55 @@ export default function LandingPage() {
             </Grid>
           </Container>
         </section>
-        <section id="components" style={{ padding: "48px 0", backgroundColor: "#2b2d42", color: "#fff", textAlign: "center" }}>
+
+        {/* Sección de beneficios */}
+        <section id="benefits" style={{ padding: "48px 0", backgroundColor: "#2b2d42", color: "#fff", textAlign: "center" }}>
           <Container>
             <Typography variant="h4" component="h2" gutterBottom style={{ fontWeight: "bold" }}>
-              Componentes de una Página Web
+              Beneficios
             </Typography>
             <Grid container spacing={4} justifyContent="center">
               <Grid item xs={12} md={6}>
-                <Typography variant="h6" style={{ color: "#ef233c" }}>Encabezado</Typography>
-                <Typography variant="body2" style={{ color: "#8d99ae" }}>Contiene el logotipo, título y navegación principal del sitio.</Typography>
+                <Typography variant="h6" style={{ color: "#fff" }}>Para Empresas</Typography>
+                <Typography variant="body2" style={{ color: "#8d99ae" }}>
+                  Acceso a ideas frescas y soluciones tecnológicas sin necesidad de altos costos iniciales.
+                </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Typography variant="h6" style={{ color: "#ef233c" }}>Contenido Principal</Typography>
-                <Typography variant="body2" style={{ color: "#8d99ae" }}>El área donde se presenta la información principal de la página.</Typography>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h6" style={{ color: "#ef233c" }}>Barra Lateral</Typography>
-                <Typography variant="body2" style={{ color: "#8d99ae" }}>Información adicional, enlaces relacionados o widgets.</Typography>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h6" style={{ color: "#ef233c" }}>Pie de Página</Typography>
-                <Typography variant="body2" style={{ color: "#8d99ae" }}>Información de contacto, enlaces útiles y derechos de autor.</Typography>
+                <Typography variant="h6" style={{ color: "#fff" }}>Para Estudiantes</Typography>
+                <Typography variant="body2" style={{ color: "#8d99ae" }}>
+                  Oportunidades de aplicar conocimientos en proyectos reales y ganar reconocimiento y compensación.
+                </Typography>
               </Grid>
             </Grid>
           </Container>
         </section>
+
+        {/* Sección de llamada a la acción */}
         <section id="learn-more" style={{ padding: "48px 0", textAlign: "center" }}>
           <Container>
             <Typography variant="h4" component="h2" gutterBottom style={{ fontWeight: "bold", color: "#2b2d42" }}>
-              ¿Quieres Aprender Más?
+              ¿Listo para Comenzar?
             </Typography>
             <Typography variant="body1" gutterBottom style={{ maxWidth: "700px", margin: "0 auto", color: "#2b2d42" }}>
-              Explora recursos adicionales para profundizar en el mundo del desarrollo web y crear tus propias páginas.
+              Únete a DevJuniors y comienza a formar parte de una comunidad que conecta el talento universitario con las necesidades empresariales.
             </Typography>
-            <Button variant="contained" style={{ backgroundColor: "#d90429", color: "#fff", marginTop: 16 }}>Explorar Recursos</Button>
+            <Button variant="contained" style={{ backgroundColor: "#74200F", color: "#fff", marginTop: 16 }}>Explorar Proyectos</Button>
           </Container>
         </section>
       </main>
+
       <footer style={{ padding: 16, backgroundColor: "#2b2d42", color: "#fff", textAlign: "center" }}>
-        <Typography variant="body2" style={{ color: "#8d99ae" }}>© 2023 WebExplorer. Todos los derechos reservados.</Typography>
+        <Typography variant="body2" style={{ color: "#8d99ae" }}>© 2023 DevJuniors. Todos los derechos reservados.</Typography>
         <div style={{ marginTop: 8 }}>
-          <a href="#" passHref>
-            <MuiLink underline="none" color="inherit" style={{ marginRight: 16 }}>Términos de Servicio</MuiLink>
-          </a>
-          <a href="#" passHref>
-            <MuiLink underline="none" color="inherit">Privacidad</MuiLink>
-          </a>
+          <MuiLink underline="none" color="inherit" style={{ marginRight: 16 }} href="#">
+            Términos de Servicio
+          </MuiLink>
+          <MuiLink underline="none" color="inherit" href="#">
+            Privacidad
+          </MuiLink>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
