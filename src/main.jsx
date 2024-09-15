@@ -7,6 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from "./routes/root";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Register from './auth/Register.jsx';
 import Navbar from './Pages/Negocio/components/navbar.jsx';
 import { InicioNegocio } from './Pages/Negocio/InicioNegocio.jsx';
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     children: [
-      { path: '/register', element: <Register /> },
+      
     ],
   },
   {
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
       { path: 'proyectos', element: <ProyectosNegocio /> },
       { path: 'configuracion', element: <ConfiguracionNegocio /> },
     ],
+  },
+  {
+    path: '/register',
+    element: <Register />,
   }
 
 
@@ -40,8 +46,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
+    </LocalizationProvider>
   </StrictMode>,
 )
