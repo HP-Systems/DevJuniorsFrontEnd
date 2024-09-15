@@ -7,13 +7,16 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import axiosInstance from "../../AxiosConfig";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CircularProgress } from '@mui/material';
 
 export const LoginPage = () => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [msj, setMsj] = useState("");
   const nav = useNavigate();
 
   const handleInputChange = (e) => {
@@ -25,20 +28,22 @@ export const LoginPage = () => {
   };
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
-      const response = await axiosInstance.post("/login", login);
-      console.log("Respuesta del login:", response.data);
-      if(response.data.tipo_usuario === "1"){
-        console.log("Usuario es un estudiante");
-        nav("/");
+        const response = await axiosInstance.post("/login", login);
+        setLoading(false);
+        console.log("Respuesta del login:", response.data);
+        if(response.data.tipo_usuario === "1"){
+          nav("/estudiante/inicio");
+        }
+      } catch (error) {
+        setLoading(false);
+        if (error.response) {
+          console.error("Error en el login:", error.response.data);
+          setMsj(error.response.data.msg);
       }
-    } catch (error) {
-      if (error.response) {
-        console.error("Error en el login:", error.response.data.error
-        );
-    }
+    };
   };
-};
 
 
 
@@ -56,6 +61,7 @@ export const LoginPage = () => {
           item
           xs={12}
           md={8}
+          borderRight={45}
           sx={{
             position: "relative",
             height: "100vh",
@@ -118,8 +124,11 @@ export const LoginPage = () => {
           >
             Entrar
           </Button>
+          <Typography color="red" variant="body" className="flex justify-center mt-6">{msj}</Typography>
+          <NavLink to="/register" className="flex justify-center mt-6"><Typography variant="body" className="text-blue-500">No estoy registrado</Typography></NavLink>
         </Grid>
       </Grid>
+      <CircularProgress style={{position: 'absolute', top: '50%', left: '50%', display: loading ? 'block' : 'none'}} />
     </Container>
   );
 };
