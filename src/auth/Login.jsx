@@ -1,26 +1,20 @@
 import {
   Container,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
   Grid,
   Typography,
   TextField,
   Button,
 } from "@mui/material";
 import { useState } from "react";
-import Student from "./Student";
-import Organization from "./Organization";
-import ErrorLabel from "../Components/ErrorLabel";
 import axiosInstance from "../../AxiosConfig";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
+  const nav = useNavigate();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -30,13 +24,21 @@ export const LoginPage = () => {
     }));
   };
 
-  const handleLogin = () => {
-    console.log("fdakjflkajjfkldjljf");
+  const handleLogin = async () => {
     try {
-      const response = axiosInstance.post("/login", login);
-      console.log("Login exitoso:", response.data);
-    } catch (error) {}
+      const response = await axiosInstance.post("/login", login);
+      console.log("Respuesta del login:", response.data);
+      if(response.data.tipo_usuario === "1"){
+        console.log("Usuario es un estudiante");
+        nav("/");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error en el login:", error.response.data.error
+        );
+    }
   };
+};
 
   return (
     <Container
@@ -109,9 +111,7 @@ export const LoginPage = () => {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={() => {
-              console.log("fjlkasdjkfjakl");
-            }}
+                onClick={handleLogin}
           >
             Entrar
           </Button>
