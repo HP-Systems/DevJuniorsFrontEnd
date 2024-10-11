@@ -83,11 +83,7 @@ export default function DetailProyect() {
     endDate: "2023-12-31",
   };
 
-  const applications = [
-    { id: 1, studentName: "Ana García", status: "Pendiente", resumeUrl: "/placeholder.svg?height=400&width=300" },
-    { id: 2, studentName: "Carlos López", status: "Aceptado", resumeUrl: "/placeholder.svg?height=400&width=300" },
-    { id: 3, studentName: "María Rodríguez", status: "Pendiente", resumeUrl: "/placeholder.svg?height=400&width=300" },
-  ];
+
 
   const openModal = (application) => {
     setSelectedApplication(application);
@@ -161,7 +157,7 @@ export default function DetailProyect() {
 
       {/* Dialog para mostrar la solicitud */}
       <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <DialogTitle>Solicitud de {selectedApplication?.studentName}</DialogTitle>
+      <DialogTitle>Solicitud de {selectedApplication?.id.$oid}</DialogTitle>
         <DialogContent>
           <Box sx={{ aspectRatio: "3/4", position: "relative", mb: 4 }}>
             <iframe
@@ -178,7 +174,15 @@ export default function DetailProyect() {
             >
               Rechazar
             </Button>
-            <Button variant="contained" startIcon={<CheckCircle />} onClick={() => setIsModalOpen(false)}>
+            <Button variant="contained" startIcon={<CheckCircle />} onClick={() =>{
+               const changePropusta = {
+                 id: selectedApplication?.id.$oid,
+                 etapa : "1"
+               }
+               const response = axiosInstance.post(`/propuesta/etapa/`,changePropusta);
+               console.log(response);
+               setIsModalOpen(false)
+            }}>
               Aceptar
             </Button>
           </Box>
